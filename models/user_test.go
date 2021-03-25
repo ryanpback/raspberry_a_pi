@@ -108,6 +108,61 @@ func TestUserEdit(t *testing.T) {
 	assert.NotEqual(userUpdatedAt, (*updatedUser).UpdatedAt)
 }
 
+func TestUserLoginFailedEmailDoesntMatch(t *testing.T) {
+	assert := assert.New(t)
+	DBConn = userTC.DBConn
+	defer th.TruncateUsers()
+
+	createUsers()
+
+	userData := Payload{
+		"email":    "randomfakeemail",
+		"password": "password",
+	}
+
+	_, err := UserLogin(userData)
+
+	assert.NotNil(err)
+}
+
+func TestUserLoginFailedPasswordDoesntMatch(t *testing.T) {
+	assert := assert.New(t)
+	DBConn = userTC.DBConn
+	defer th.TruncateUsers()
+
+	createUsers()
+	u, _ := UserFindByID(1)
+	email := u.Email
+
+	userData := Payload{
+		"email":    email,
+		"password": "faketestpassword",
+	}
+
+	_, err := UserLogin(userData)
+
+	assert.NotNil(err)
+}
+
+func TestUserLoginSuccessful(t *testing.T) {
+	assert := assert.New(t)
+	DBConn = userTC.DBConn
+	defer th.TruncateUsers()
+
+	createUsers()
+	u, _ := UserFindByID(1)
+	email := u.Email
+
+	userData := Payload{
+		"email":    email,
+		"password": "password",
+	}
+
+	user, _ := UserLogin(userData)
+
+	assert.Equal(u, user)
+}
+
 func TestFindByEmailUserNotExists(t *testing.T) {
 	assert := assert.New(t)
 	DBConn = userTC.DBConn
