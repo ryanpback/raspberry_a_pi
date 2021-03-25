@@ -28,6 +28,9 @@ func bootstrap() {
 	handlers.DBConn = appConfig.DBConn
 	handlers.Log = appConfig.Logger
 
+	// let's now hydrate a few things in the helpers package
+	helpers.Log = appConfig.Logger
+
 	// let's now hydrate a few things in the models package
 	models.DBConn = appConfig.DBConn
 	models.Log = appConfig.Logger

@@ -9,6 +9,7 @@ require (
 	github.com/gorilla/mux v1.8.0 // indirect
 	github.com/joho/godotenv v1.3.0
 	github.com/lib/pq v1.10.0 // indirect
+	github.com/microcosm-cc/bluemonday v1.0.4 // indirect
 	// github.com/mattn/go-sqlite3 v1.14.6 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pressly/goose v2.7.0+incompatible // indirect
