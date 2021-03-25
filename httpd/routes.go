@@ -2,6 +2,8 @@ package main
 
 import (
 	"net/http"
+
+	"github.com/ryanpback/raspberry_a_pi/httpd/handlers"
 )
 
 type query map[string]string
@@ -33,9 +35,24 @@ func openRoutes() []handlerInfo {
 
 	routes = []handlerInfo{
 		{
-			// route:       "/some_route",
-			// handlerFunc: handlers.SomeMethod,
-			// corsMethods: []string{http.HttpVerb},
+			route:       "/login",
+			handlerFunc: handlers.UsersLogin,
+			corsMethods: []string{"POST", "OPTIONS"},
+		},
+		{
+			route:       "/users/{id: [0-9]+}",
+			handlerFunc: handlers.UsersShow,
+			corsMethods: []string{"GET", "OPTIONS"},
+		},
+		{
+			route:       "/users",
+			handlerFunc: handlers.UsersCreate,
+			corsMethods: []string{"POST", "OPTIONS"},
+		},
+		{
+			route:       "/users/{id:[0-9]+}",
+			handlerFunc: handlers.UsersEdit,
+			corsMethods: []string{"PATCH", "OPTIONS"},
 		},
 	}
 
