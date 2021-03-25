@@ -10,13 +10,25 @@ import (
 var appConfig bs.Config
 
 func bootstrap() {
-	c, err := bs.InitConfig(helpers.GetEnv(isTesting))
+	c, err := bs.InitConfig()
+	appConfig = c
+
 	if err != nil {
-		panic(err)
+		helpers.LogError(err)
+		helpers.LogInfo(appConfig)
+		panic("Someting went wrong, check your environment variables")
 	}
 
-	appConfig = c
-	helpers.AppConfig = c
-	models.AppConfig = c
-	handlers.AppConfig = c
+	helpers.LogInfo("Application bootstrapped with the following settings:")
+	helpers.LogInfo("Port: " + appConfig.AppPort)
+	helpers.LogInfo("Database: " + appConfig.DBDatabase)
+	helpers.LogInfo("DB Username: " + appConfig.DBUsername)
+
+	// let's now hydrate a few things in the handlers package
+	handlers.DBConn = appConfig.DBConn
+	handlers.Log = appConfig.Logger
+
+	// let's now hydrate a few things in the models package
+	models.DBConn = appConfig.DBConn
+	models.Log = appConfig.Logger
 }
