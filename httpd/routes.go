@@ -31,9 +31,7 @@ func paramRoutes() []handlerInfo {
 }
 
 func openRoutes() []handlerInfo {
-	var routes []handlerInfo
-
-	routes = []handlerInfo{
+	routes := []handlerInfo{
 		{
 			route:       "/login",
 			handlerFunc: handlers.UsersLogin,
