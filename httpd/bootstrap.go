@@ -12,15 +12,15 @@ func bootstrap() {
 	c, err := bs.InitConfig()
 	appConfig = c
 
-	if err != nil {
-		helpers.LogError(err)
-		helpers.LogInfo(appConfig)
-		panic("Someting went wrong, check your environment variables")
-	}
-
 	// let's now hydrate a few things
 	models.DBConn = appConfig.DBConn
 	helpers.Logger = appConfig.Logger
+
+	if err != nil {
+		helpers.LogError(err)
+		helpers.LogInfo(appConfig)
+		panic("Something went wrong, check your environment variables")
+	}
 
 	helpers.LogInfo("Application bootstrapped with the following settings:")
 	helpers.LogInfo("Port: " + appConfig.AppPort)
