@@ -75,7 +75,7 @@ func InitConfig() (Config, error) {
 }
 
 func dsn(c Config) string {
-	dsn := "user=" + c.DBUsername + " dbname=" + c.DBDatabase + " sslmode=disable"
+	dsn := "user=" + c.DBUsername + " password=" + c.DBPassword + " dbname=" + c.DBDatabase + " sslmode=disable"
 
 	return dsn
 }
