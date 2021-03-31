@@ -33,6 +33,11 @@ func paramRoutes() []handlerInfo {
 func openRoutes() []handlerInfo {
 	routes := []handlerInfo{
 		{
+			route:       "/",
+			handlerFunc: handlers.Index,
+			corsMethods: []string{"GET", "OPTIONS"},
+		},
+		{
 			route:       "/login",
 			handlerFunc: handlers.UsersLogin,
 			corsMethods: []string{"POST", "OPTIONS"},
