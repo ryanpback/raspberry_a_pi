@@ -43,7 +43,7 @@ func openRoutes() []handlerInfo {
 			corsMethods: []string{"POST", "OPTIONS"},
 		},
 		{
-			route:       "/users/{id: [0-9]+}",
+			route:       "/users/{id:[0-9]+}",
 			handlerFunc: handlers.UsersShow,
 			corsMethods: []string{"GET", "OPTIONS"},
 		},
