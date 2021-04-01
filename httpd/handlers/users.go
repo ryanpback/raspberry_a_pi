@@ -108,6 +108,7 @@ func UsersEdit(w http.ResponseWriter, r *http.Request) {
 	updatedUser, err := models.UserEdit(user, request)
 	if err != nil {
 		respondWithError(w, http.StatusInternalServerError, err.Error())
+		return
 	}
 
 	response := Response{
